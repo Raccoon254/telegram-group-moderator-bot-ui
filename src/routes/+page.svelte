@@ -84,7 +84,7 @@
 			const response = await fetch(`${API_BASE}/api/users`);
 			const data = await response.json();
 			if (data.success) {
-				users = data.data.slice(0, 10);
+				users = data.data;
 			}
 		} catch (error) {
 			console.error('Error fetching users:', error);
@@ -93,7 +93,7 @@
 
 	async function fetchViolations() {
 		try {
-			const response = await fetch(`${API_BASE}/api/logs?limit=15`);
+			const response = await fetch(`${API_BASE}/api/logs?limit=50`);
 			const data = await response.json();
 			if (data.success) {
 				violations = data.data;
@@ -112,6 +112,9 @@
 				connected = true;
 			} else {
 				realtimeEvents = [data, ...realtimeEvents].slice(0, 5);
+				// Reset pagination to show new data
+				violationsPage = 1;
+				usersPage = 1;
 				fetchStats();
 				fetchUsers();
 				fetchViolations();
@@ -980,6 +983,51 @@
 		color: var(--color-text-muted);
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
+	}
+
+	/* Pagination */
+	.pagination {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-border);
+	}
+
+	.pagination-btn {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		color: var(--color-text);
+		font-size: 0.875rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.2s;
+		font-family: inherit;
+	}
+
+	.pagination-btn:hover:not(:disabled) {
+		background: var(--color-primary);
+		color: white;
+		border-color: var(--color-primary);
+		transform: translateY(-1px);
+	}
+
+	.pagination-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+
+	.pagination-info {
+		font-size: 0.875rem;
+		color: var(--color-text-muted);
+		font-weight: 500;
 	}
 
 	/* Footer */
