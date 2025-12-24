@@ -445,9 +445,20 @@
 					<p>Powered by Group Guard API - Real-time Telegram Group Moderation</p>
 					<p class="footer-subtext">Keeping communities safe with AI-powered moderation</p>
 				</div>
-				<a href="https://kentom.co.ke" target="_blank" rel="noopener" class="footer-link">
-					Created by Kentom
-				</a>
+				<div class="kentom-footer">
+					<a
+							href="https://kentom.co.ke"
+							target="_blank"
+							rel="noopener"
+							class="kentom-cta"
+							aria-label="Created by Kentom — opens in a new tab"
+					>
+						<div>
+							<img src="https://kentom.co.ke/logo-dark.png" alt="Kentom logo" class="kentom-logo-inline" />
+						</div>
+						<span class="kentom-text">Powered by Kentom</span>
+					</a>
+				</div>
 			</div>
 		</div>
 	</footer>
@@ -1102,6 +1113,80 @@
 
 		.content-grid {
 			gap: 3rem;
+		}
+	}
+
+	/* Footer Kentom block */
+	.kentom-footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end; /* keeps it at the right in the footer row */
+		gap: 0.75rem;
+	}
+
+	/* Clickable CTA combining logo + text */
+	.kentom-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.45rem 0.7rem;
+		border-radius: 10px;
+		text-decoration: none;
+		color: var(--color-text);
+		background: transparent;
+		border: 1px solid transparent;
+		transition: background-color 150ms ease, transform 120ms ease, box-shadow 150ms ease, border-color 150ms ease;
+		font-weight: 600;
+	}
+
+	/* Hover / focus affordance */
+	.kentom-cta:hover,
+	.kentom-cta:focus {
+		transform: translateY(-2px);
+		outline: none;
+		color: #1e40af;
+	}
+
+	/* Logo inside the CTA */
+	.kentom-logo-inline {
+		width: 44px;
+		height: 44px;
+		object-fit: contain;
+		margin-top: 10px;
+		margin-left: 4px;
+	}
+
+	.kentom-cta > div {
+		border: 1px solid var(--color-border);
+		border-radius: 50px;
+		padding: 10px;
+		width: 64px;
+		height: 64px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.kentom-cta > div:hover {
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-primary);
+	}
+
+	/* Text styling */
+	.kentom-text {
+		color: var(--color-text);
+		font-size: 0.95rem;
+		line-height: 1;
+	}
+
+	/* Responsive: hide label on very small screens to save space */
+	@media (max-width: 460px) {
+		.kentom-text {
+			display: none;
+		}
+		.kentom-footer {
+			justify-content: center;
 		}
 	}
 </style>
